@@ -1,6 +1,6 @@
 ﻿from flask import Flask, jsonify, request
 app = Flask(__name__)
-# -*- coding: utf-8 -*-
+# http://127.0.0.1:5000/check_domain?domain=www.gotennis.ru/
 import requests
 from bs4 import BeautifulSoup
 def parser(domain):
