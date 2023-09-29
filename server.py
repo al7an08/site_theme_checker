@@ -26,6 +26,7 @@ def check_domain():
         return jsonify({'error': 'Параметр domain отсутствует в запросе'}), 400
 
 if __name__ == '__main__':
+    app.config['JSON_AS_ASCII'] = False
     app.run(debug=True)
 
 
