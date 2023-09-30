@@ -1,3 +1,4 @@
+
 import requests
 import openpyxl
 
@@ -26,13 +27,15 @@ worksheet['A1'] = 'URL'
 worksheet['B1'] = 'Response'
 
 # Отправьте GET-запросы и запишите ответы в таблицу
-
-for index, url in enumerate(urls, start=2):
+index=0
+for  url in urls[200:]:
     response = requests.get(url)
     print(url)
-    worksheet[f'A{index}'] = url
-    worksheet[f'B{index}'] = response.text
-    if index==70:
+    if (len(response.text)>10 and response.status_code==200):
+        worksheet[f'A{index+1}'] = url
+        worksheet[f'B{index+1}'] = response.text
+        index+=1
+    if index==500:
         break
 
 # Сохраните книгу в файл XLSX
@@ -42,3 +45,4 @@ workbook.save('responses.xlsx')
 workbook.close()
 
 print("Ответы записаны в файл responses.xlsx")
+

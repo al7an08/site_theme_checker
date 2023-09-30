@@ -28,21 +28,13 @@ def parser(domain):
     #response = requests.get(url, verify=False)
     response = session.get(url, verify=False,  headers=header, timeout=30)
     if response.status_code == 200:
-
         response.encoding = 'utf-8'
+
         soup = BeautifulSoup((response.text), 'html.parser')
-        text = soup.get_text()
+        text = soup.get_text(strip=True)
         return text
     else:
-        url = f'https://{domain}'
-        response = session.get(url, verify=False,  headers=header)
-        if response.status_code == 200:
-          
-            soup = BeautifulSoup(response.text, 'html.parser')
-            text = soup.get_text()
-            return text
-        else:
-            return(f"Ошибка при запросе: {response.status_code}")
+        return(f"false")
 #www.gotennis.ru/
 @app.route('/check_domain', methods=['GET'])
 def check_domain():
@@ -56,5 +48,3 @@ def check_domain():
 if __name__ == '__main__':
     app.config['JSON_AS_ASCII'] = False
     app.run(debug=True)
-
-
